@@ -22,7 +22,6 @@ dependencies {
     implementation 'dev.nextftc:hardware:1.1.0'
     implementation 'dev.nextftc:control:1.0.0'
     implementation 'dev.nextftc:bindings:1.0.1'
-    implementation 'dev.nextftc.extensions:pedro:1.0.0'
     // Marrow
     implementation 'com.skeletonarmyftc.marrow:core:1.1.1'
 }
