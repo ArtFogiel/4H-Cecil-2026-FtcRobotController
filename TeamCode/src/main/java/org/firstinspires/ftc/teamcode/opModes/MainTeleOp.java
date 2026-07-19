@@ -9,7 +9,7 @@ import dev.nextftc.core.components.SubsystemComponent;
 import dev.nextftc.ftc.Gamepads;
 import dev.nextftc.ftc.NextFTCOpMode;
 import dev.nextftc.ftc.components.BulkReadComponent;
-@TeleOp(name="Test", group = "OpMode")
+@TeleOp(name="MainTeleOp", group = "OpMode")
 public class MainTeleOp extends NextFTCOpMode {
     public MainTeleOp() {
         addComponents(
@@ -28,6 +28,15 @@ public class MainTeleOp extends NextFTCOpMode {
         Gamepads.gamepad1().leftBumper()
                 .whenBecomesTrue(INTAKE.open)
                 .whenBecomesFalse(INTAKE.close)
+        ;
+        Gamepads.gamepad1().triangle()
+                .whenBecomesTrue(DRIVE.turnToAngle(180).then(DRIVE.teleDrive))
+        ;
+        Gamepads.gamepad1().circle()
+                .whenBecomesTrue(DRIVE.driveInches(24).then(DRIVE.teleDrive))
+        ;
+        Gamepads.gamepad1().leftStickButton()
+                .whenBecomesTrue(DRIVE.teleDrive)
         ;
     }
 }
