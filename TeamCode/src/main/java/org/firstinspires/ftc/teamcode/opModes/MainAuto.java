@@ -31,9 +31,8 @@ public class MainAuto extends NextFTCOpMode {
     @Override
     public void onStartButtonPressed() {
         new SequentialGroup(
-                DRIVE.driveInches(12),
-                DRIVE.turnToAngle(mirrorAngle(180)),
-                DRIVE.turnToAngle(mirrorAngle(90))
+                DRIVE.driveInches(24),
+                DRIVE.turnToAngle(mirrorAngle(180))
         ).schedule();
     }
     private double mirrorAngle(double angle) {

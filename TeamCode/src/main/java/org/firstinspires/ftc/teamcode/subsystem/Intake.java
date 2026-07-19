@@ -13,7 +13,7 @@ public class Intake implements Subsystem {
     public Command open = new Command() {
         @Override
         public void start() {
-            intake.setPosition(0.7);
+            intake.setPosition(0.3);
         }
 
         @Override
