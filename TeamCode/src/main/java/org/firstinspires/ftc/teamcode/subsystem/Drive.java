@@ -34,8 +34,8 @@ public class Drive implements Subsystem {
     private static final double TICKS_PER_REV = 537.7;
     private static final double WHEEL_DIAMETER_IN = 96/25.4;
     private static final double TICKS_PER_INCH = TICKS_PER_REV / (WHEEL_DIAMETER_IN * PI);
-    private final Supplier<Double> turnPower = ()-> (double) ActiveOpMode.gamepad1().right_stick_x*0.5;
-    private final Supplier<Double> forwardPower = ()-> (double) ActiveOpMode.gamepad1().left_stick_y*-0.5;
+    private final Supplier<Double> turnPower = ()-> (double) ActiveOpMode.gamepad1().right_stick_x*((ActiveOpMode.gamepad1().left_trigger*0.5)+0.5);
+    private final Supplier<Double> forwardPower = ()-> (double) ActiveOpMode.gamepad1().left_stick_y*-((ActiveOpMode.gamepad1().left_trigger*0.5)+0.5);
 
     private double getHeading() {
         return imu.get().inDeg + headingOffset;
@@ -164,6 +164,7 @@ public class Drive implements Subsystem {
             ActiveOpMode.telemetry().addData("Right Ticks", rightDrive.getCurrentPosition());
             ActiveOpMode.telemetry().addData("Heading", getHeading());
         }
+        ActiveOpMode.telemetry().addData("speed multiplier", ActiveOpMode.gamepad1().left_trigger);
         ActiveOpMode.telemetry().update();
     }
 }

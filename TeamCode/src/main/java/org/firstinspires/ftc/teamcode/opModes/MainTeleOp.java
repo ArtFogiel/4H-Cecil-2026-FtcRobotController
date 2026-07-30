@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.opModes;
 
 import static org.firstinspires.ftc.teamcode.subsystem.Drive.DRIVE;
 import static org.firstinspires.ftc.teamcode.subsystem.Intake.INTAKE;
+import static org.firstinspires.ftc.teamcode.subsystem.Outtake.OUTTAKE;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import dev.nextftc.core.components.BindingsComponent;
@@ -15,7 +16,8 @@ public class MainTeleOp extends NextFTCOpMode {
         addComponents(
                 new SubsystemComponent(
                         DRIVE,
-                        INTAKE
+                        INTAKE,
+                        OUTTAKE
                 ),
                 BindingsComponent.INSTANCE,
                 BulkReadComponent.INSTANCE
@@ -29,14 +31,11 @@ public class MainTeleOp extends NextFTCOpMode {
                 .whenBecomesTrue(INTAKE.open)
                 .whenBecomesFalse(INTAKE.close)
         ;
-        Gamepads.gamepad1().triangle()
-                .whenBecomesTrue(DRIVE.turnToAngle(180).then(DRIVE.teleDrive))
-        ;
         Gamepads.gamepad1().circle()
-                .whenBecomesTrue(DRIVE.driveInches(24).then(DRIVE.teleDrive))
+                .whenBecomesTrue(OUTTAKE.load)
         ;
-        Gamepads.gamepad1().leftStickButton()
-                .whenBecomesTrue(DRIVE.teleDrive)
+        Gamepads.gamepad1().cross()
+                .whenBecomesTrue(OUTTAKE.drop)
         ;
     }
 }

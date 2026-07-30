@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.opModes;
 
 import static org.firstinspires.ftc.teamcode.subsystem.Drive.DRIVE;
 import static org.firstinspires.ftc.teamcode.subsystem.Intake.INTAKE;
+import static org.firstinspires.ftc.teamcode.subsystem.Outtake.OUTTAKE;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.skeletonarmy.marrow.settings.Settings;
@@ -17,7 +18,8 @@ public class MainAuto extends NextFTCOpMode {
         addComponents(
                 new SubsystemComponent(
                         DRIVE,
-                        INTAKE
+                        INTAKE,
+                        OUTTAKE
                 ),
                 BulkReadComponent.INSTANCE
         );
@@ -30,9 +32,21 @@ public class MainAuto extends NextFTCOpMode {
 
     @Override
     public void onStartButtonPressed() {
+        OUTTAKE.preLoad.schedule();
         new SequentialGroup(
-                DRIVE.driveInches(24),
-                DRIVE.turnToAngle(mirrorAngle(180))
+                DRIVE.driveInches(30),
+                DRIVE.turnToAngle(mirrorAngle(180)),
+                DRIVE.driveInches(36).and(INTAKE.open),
+                INTAKE.close.and(OUTTAKE.drop),
+                DRIVE.driveInches(-20).afterTime(1),
+                DRIVE.turnToAngle(mirrorAngle(90)),
+                DRIVE.driveInches(44),
+                DRIVE.turnToAngle(mirrorAngle(180)),
+                DRIVE.driveInches(14).and(INTAKE.open),
+                INTAKE.close.and(OUTTAKE.drop),
+                DRIVE.driveInches(-18).afterTime(1),
+                DRIVE.turnToAngle(mirrorAngle(90)),
+                DRIVE.driveInches(-44)
         ).schedule();
     }
     private double mirrorAngle(double angle) {
