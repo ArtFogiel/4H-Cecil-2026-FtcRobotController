@@ -27,14 +27,15 @@ public class MainTeleOp extends NextFTCOpMode {
     @Override
     public void onStartButtonPressed() {
         DRIVE.teleDrive.schedule();
+        INTAKE.close.schedule();
         Gamepads.gamepad1().leftBumper()
                 .whenBecomesTrue(INTAKE.open)
                 .whenBecomesFalse(INTAKE.close)
         ;
-        Gamepads.gamepad1().circle()
+        Gamepads.gamepad1().rightBumper()
                 .whenBecomesTrue(OUTTAKE.load)
         ;
-        Gamepads.gamepad1().cross()
+        Gamepads.gamepad1().rightTrigger().greaterThan(0.1)
                 .whenBecomesTrue(OUTTAKE.drop)
         ;
     }

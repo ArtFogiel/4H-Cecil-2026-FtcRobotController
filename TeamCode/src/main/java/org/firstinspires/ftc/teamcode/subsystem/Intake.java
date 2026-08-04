@@ -9,11 +9,12 @@ public class Intake implements Subsystem {
     private Intake() {}
 
     private final ServoEx intake = new ServoEx("intake");
+    private boolean intakeOpen = false;
 
     public Command open = new Command() {
         @Override
         public void start() {
-            intake.setPosition(0.3);
+            intakeOpen = true;
         }
 
         @Override
@@ -24,7 +25,7 @@ public class Intake implements Subsystem {
     public Command close = new Command() {
         @Override
         public void start() {
-            intake.setPosition(0.5);
+            intakeOpen = false;
         }
 
         @Override
@@ -32,4 +33,12 @@ public class Intake implements Subsystem {
             return true;
         }
     }.requires(this);
+    @Override
+    public void periodic() {
+        if(intakeOpen) {
+            intake.setPosition(0.3);
+        } else {
+            intake.setPosition(0.5);
+        }
+    }
 }

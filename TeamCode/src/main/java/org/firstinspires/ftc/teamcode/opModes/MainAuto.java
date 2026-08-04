@@ -36,15 +36,15 @@ public class MainAuto extends NextFTCOpMode {
         new SequentialGroup(
                 DRIVE.driveInches(30),
                 DRIVE.turnToAngle(mirrorAngle(180)),
-                DRIVE.driveInches(36).and(INTAKE.open),
+                DRIVE.driveInches(39).and(INTAKE.open),
                 INTAKE.close.and(OUTTAKE.drop),
-                DRIVE.driveInches(-20).afterTime(1),
+                DRIVE.driveInches(-23).afterTime(1),
                 DRIVE.turnToAngle(mirrorAngle(90)),
-                DRIVE.driveInches(44),
+                DRIVE.driveInches(43.5),
                 DRIVE.turnToAngle(mirrorAngle(180)),
-                DRIVE.driveInches(14).and(INTAKE.open),
+                DRIVE.driveInches(18).and(INTAKE.open),
                 INTAKE.close.and(OUTTAKE.drop),
-                DRIVE.driveInches(-18).afterTime(1),
+                DRIVE.driveInches(-22).afterTime(1),
                 DRIVE.turnToAngle(mirrorAngle(90)),
                 DRIVE.driveInches(-44)
         ).schedule();
