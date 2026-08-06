@@ -12,5 +12,6 @@ public class SettingsSetter extends SettingsOpMode {
     public void defineSettings() {
         add("debug_mode", "Debug Mode", new BooleanPrompt("Enable debug mode?", false));
         add("alliance", "Select Alliance", new OptionPrompt<>("Select alliance", alliance.RED, alliance.BLUE));
+        add("controller", "Controller Count", new OptionPrompt<>("How Many Controllers", 1, 2));
     }
 }

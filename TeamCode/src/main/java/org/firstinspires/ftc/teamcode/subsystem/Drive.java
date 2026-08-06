@@ -45,10 +45,10 @@ public class Drive implements Subsystem {
         headingOffset = degrees;
     }
     private final ControlSystem control = ControlSystem.builder()
-            .posPid(0.0005, 0.000000000001, 0.00005)
+            .posPid(0.0005, 0.000000000002, 0.00005)
             .build();
     private final ControlSystem headingControl = ControlSystem.builder()
-            .posPid(0.01, 0.00000000001, 0.001)
+            .posPid(0.01, 0.00000000002, 0.001)
             .build();
 
     public Command teleDrive = new Command() {
@@ -132,12 +132,12 @@ public class Drive implements Subsystem {
             public void update() {
                 double currentAngle = getHeading();
                 double power = headingControl.calculate(new KineticState(currentAngle, imu.getImu().getRobotAngularVelocity(AngleUnit.DEGREES).zRotationRate, 0));
-                if (power < -0.5) {
-                    leftDrive.setPower(0.5);
-                    rightDrive.setPower(-0.5);
-                } else if (power > 0.5){
-                    leftDrive.setPower(-0.5);
-                    rightDrive.setPower(0.5);
+                if (power < -0.75) {
+                    leftDrive.setPower(0.75);
+                    rightDrive.setPower(-0.75);
+                } else if (power > 0.75){
+                    leftDrive.setPower(-0.75);
+                    rightDrive.setPower(0.75);
                 } else {
                     leftDrive.setPower(-power);
                     rightDrive.setPower(power);

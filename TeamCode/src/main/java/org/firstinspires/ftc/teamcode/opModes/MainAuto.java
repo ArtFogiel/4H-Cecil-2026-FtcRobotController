@@ -34,19 +34,19 @@ public class MainAuto extends NextFTCOpMode {
     public void onStartButtonPressed() {
         OUTTAKE.preLoad.schedule();
         new SequentialGroup(
-                DRIVE.driveInches(30),
+                DRIVE.driveInches(29),
                 DRIVE.turnToAngle(mirrorAngle(180)),
                 DRIVE.driveInches(39).and(INTAKE.open),
                 INTAKE.close.and(OUTTAKE.drop),
-                DRIVE.driveInches(-23).afterTime(1),
+                DRIVE.driveInches(-26).afterTime(1),
                 DRIVE.turnToAngle(mirrorAngle(90)),
-                DRIVE.driveInches(43.5),
+                DRIVE.driveInches(42),
                 DRIVE.turnToAngle(mirrorAngle(180)),
                 DRIVE.driveInches(18).and(INTAKE.open),
                 INTAKE.close.and(OUTTAKE.drop),
                 DRIVE.driveInches(-22).afterTime(1),
-                DRIVE.turnToAngle(mirrorAngle(90)),
-                DRIVE.driveInches(-44)
+                DRIVE.turnToAngle(mirrorAngle(105)),
+                DRIVE.driveInches(-81)
         ).schedule();
     }
     private double mirrorAngle(double angle) {

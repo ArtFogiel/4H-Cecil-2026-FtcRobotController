@@ -5,6 +5,8 @@ import static org.firstinspires.ftc.teamcode.subsystem.Intake.INTAKE;
 import static org.firstinspires.ftc.teamcode.subsystem.Outtake.OUTTAKE;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.skeletonarmy.marrow.settings.Settings;
+
 import dev.nextftc.core.components.BindingsComponent;
 import dev.nextftc.core.components.SubsystemComponent;
 import dev.nextftc.ftc.Gamepads;
@@ -28,15 +30,28 @@ public class MainTeleOp extends NextFTCOpMode {
     public void onStartButtonPressed() {
         DRIVE.teleDrive.schedule();
         INTAKE.close.schedule();
-        Gamepads.gamepad1().leftBumper()
+        if (Settings.get("controller", 2) == 1) {
+            Gamepads.gamepad1().leftBumper()
+                    .whenBecomesTrue(INTAKE.open)
+                    .whenBecomesFalse(INTAKE.close)
+            ;
+            Gamepads.gamepad1().rightBumper()
+                    .whenBecomesTrue(OUTTAKE.load)
+            ;
+            Gamepads.gamepad1().rightTrigger().greaterThan(0.1)
+                    .whenBecomesTrue(OUTTAKE.drop)
+            ;
+        } else {
+        Gamepads.gamepad2().leftBumper()
                 .whenBecomesTrue(INTAKE.open)
                 .whenBecomesFalse(INTAKE.close)
         ;
-        Gamepads.gamepad1().rightBumper()
+        Gamepads.gamepad2().rightBumper()
                 .whenBecomesTrue(OUTTAKE.load)
         ;
-        Gamepads.gamepad1().rightTrigger().greaterThan(0.1)
+        Gamepads.gamepad2().rightTrigger().greaterThan(0.1)
                 .whenBecomesTrue(OUTTAKE.drop)
         ;
+        }
     }
 }
